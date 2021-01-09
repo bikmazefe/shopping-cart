@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router basename = "/">
         <Nav cartSize = {cartItems.length} />
         <Switch>
           <Route exact path = "/" component = {Home}/>
