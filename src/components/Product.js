@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+
 
 function Product(props) {
-
-    const [product, setProduct] = useState({});
-
-    useEffect(() => {
-        const id = props.match.params.id;
-
-        axios.get(`https://fakestoreapi.com/products/${id}`)
-            .then(resp => setProduct(resp.data))
-            .catch(err => console.err(err));
-    }, [])
-
     return (
-        <div>
-            <img src={product.image} alt=""/>
-            <span>{product.title}</span>
+        <div className = "product-card">
+            <img src={props.item.img_url} alt=""/>
+            <span className = "item-title" >{props.item.title}</span>
+            <div className="">
+                <button onClick = {() => props.handleAddToCart(props.item.id)}>Add to Cart</button>
+                <span className="item-price">€ {props.item.price} -</span>
+            </div>
         </div>
     );
 }

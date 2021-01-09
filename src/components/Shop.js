@@ -1,13 +1,13 @@
 import React from 'react';
-import ProductList from './ProductList'
+import Product from './Product'
+import '../style/Shop.scss'
 
 const Shop = (props) => {
     return (
         <div className = "shop">
-            <h1>Shop</h1>
             <div className="item-container">
                 {props.products.map(product => {
-                    return <ProductList 
+                    return <Product 
                                 item = {product} 
                                 handleAddToCart = {props.handleAddToCart}/>
                 })}

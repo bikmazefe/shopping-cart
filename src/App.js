@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import axios from 'axios';
+import ItemList from './ItemList';
 import Home from './components/Home'
 import Shop from './components/Shop'
-import Product from './components/Product'
 import Nav from './components/Nav'
-import './App.css'
+import Cart from './components/Cart'
+import './style/App.scss'
+
 
 function App() {
 
@@ -13,9 +14,8 @@ function App() {
   const [products, setProducts] = useState([]);
   
   useEffect(() => {
-      axios.get('https://fakestoreapi.com/products')
-        .then(resp => setProducts(resp.data))
-        .catch(err => console.err(err));
+      const data = ItemList;
+      setProducts(data);
   }, []);
 
   const handleAddToCart = (id) => {
@@ -33,6 +33,24 @@ function App() {
       }
   };
 
+  const handleRemoveFromCart = (id) => {
+    const cartCopy = [...cartItems];
+    const index = cartCopy.findIndex(item => item.id === id);
+    cartCopy.splice(index, 1)
+    setCartItems(cartCopy)
+  }
+
+  const handleQuantityChange = (action, id) => {
+    const cartCopy = [...cartItems];
+    const index = cartCopy.findIndex(item => item.id === id);
+    if (action ===  "increment") {
+      cartCopy[index].quantity++;
+    } else  {
+      cartCopy[index].quantity--;
+    }
+    setCartItems(cartCopy);
+  }
+
   return (
     <div className="App">
       <Router>
@@ -47,7 +65,15 @@ function App() {
                   handleAddToCart = {handleAddToCart} />
               }
             />
-          <Route exact path = "/shop/:id" component = {Product}/>
+          <Route 
+            exact path = "/cart"
+            render = {() => 
+                <Cart 
+                  cartItems = {cartItems} 
+                  handleRemoveFromCart = {handleRemoveFromCart}
+                  handleQuantityChange = {handleQuantityChange}/>
+              }
+            /> 
         </Switch>
       </Router>
     </div>
