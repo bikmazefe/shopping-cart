@@ -56,9 +56,9 @@ function App() {
       <Router basename = "/">
         <Nav cartSize = {cartItems.length} />
         <Switch>
-          <Route exact path = "/" component = {Home}/>
+          <Route exact path = "/shopping-cart/" component = {Home}/>
           <Route 
-            exact path = "/shop" 
+            exact path = "/shopping-cart/shop" 
             render = {() => 
                 <Shop 
                   products = {products}
@@ -66,7 +66,7 @@ function App() {
               }
             />
           <Route 
-            exact path = "/cart"
+            exact path = "/shopping-cart/cart"
             render = {() => 
                 <Cart 
                   cartItems = {cartItems} 

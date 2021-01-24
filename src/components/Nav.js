@@ -11,9 +11,9 @@ const Nav = (props) => {
                 <h1>SAX<span>SHOP</span></h1>
             </div>
             <div className="nav-links">
-                <Link to = "/"> HOME </Link>
-                <Link to = "/shop"> SHOP </Link>
-                <Link to = "/cart" id = "cart-icon">
+                <Link to = "/shopping-cart/"> HOME </Link>
+                <Link to = "/shopping-cart/shop"> SHOP </Link>
+                <Link to = "/shopping-cart/cart" id = "cart-icon">
                     <img src={Cart} alt=""/>
                     <span>{props.cartSize}</span>
                 </Link>
